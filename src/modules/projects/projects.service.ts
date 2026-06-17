@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ProjectRequestDTO } from './projects.dto';
 
 @Injectable()
 export class ProjectsService {
@@ -10,11 +11,11 @@ export class ProjectsService {
     return `Esta rota retorna apenas o projeto com id ${id}`
   }
 
-  create(data: any) {
+  create(data: ProjectRequestDTO) {
     return `Esta rota cria um projeto, com o corpo: ${data}`
   }
 
-  update(id: string, data: any) {
+  update(id: string, data: ProjectRequestDTO) {
     return `Esta rota atualiza um projeto, com o id ${id} e corpo: ${data}`
   }
 
