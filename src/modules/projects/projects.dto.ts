@@ -11,3 +11,20 @@ export class ProjectRequestDTO {
   @IsString()
   description!: string
 }
+
+export class ProjectListItemDTO {
+  @ApiProperty()
+  id!: string
+
+  @ApiProperty()
+  name!: string
+
+  @ApiProperty()
+  description!: string
+
+  @ApiProperty({ format: 'date-time'})
+  createdAt!: string
+
+  @ApiProperty({ format: 'date-time'})
+  updateAt!: string
+}
