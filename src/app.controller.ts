@@ -1,6 +1,6 @@
 import { Controller, Get, HttpStatus } from '@nestjs/common'
-import { AppService } from './app.service'
 import { ApiResponse } from '@nestjs/swagger'
+import { AppService } from './app.service'
 
 @Controller({
   version: '1',
@@ -17,9 +17,9 @@ export class AppController {
       properties: {
         message: {
           type: 'string',
-        }
-      }
-    }
+        },
+      },
+    },
   })
   getHealthCheck() {
     return this.appService.getHealthCheck()
