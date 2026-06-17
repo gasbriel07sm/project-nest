@@ -1,3 +1,2 @@
 allowBuilds:
-  '@scarf/scarf': set this to true or false
-  unrs-resolver: false
+  '@prisma/client': true
