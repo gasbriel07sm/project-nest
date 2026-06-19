@@ -41,7 +41,7 @@ export class ProjectsService {
     return this.prisma.project.create({
       data: {
         ...data,
-        createdById: '819f610d-94bf-4978-ad12-cb48a83c813e', // TODO - remover quando tiver autenticação
+        createdById: '123', // TODO - remover quando tiver autenticação
       },
     })
   }
