@@ -1,4 +1,3 @@
-import { Optional } from '@nestjs/common'
 import { ApiProperty } from '@nestjs/swagger'
 import { Role } from '@prisma/client'
 import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
@@ -28,7 +27,7 @@ export class CreateUserDTO {
 export class UpdateUserDTO {
   @ApiProperty({ description: 'User name', required: false })
   @IsString()
-  @Optional()
+  @IsOptional()
   name?: string
 
   @ApiProperty({ description: 'User role', enum: Role, default: Role.ADMIN, required: false })

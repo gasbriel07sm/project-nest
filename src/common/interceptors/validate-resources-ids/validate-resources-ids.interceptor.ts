@@ -14,7 +14,7 @@ import { PrismaService } from '../../../prisma.service'
 export class ValidateResourcesIdsInterceptor implements NestInterceptor {
   constructor(
     private readonly reflector: Reflector,
-    private readonly prsima: PrismaService,
+    private readonly prisma: PrismaService,
   ) {}
 
   async intercept(context: ExecutionContext, next: CallHandler): Promise<Observable<Request>> {
@@ -32,7 +32,7 @@ export class ValidateResourcesIdsInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest()
     const projectId = request.params.projectId
 
-    const project = await this.prsima.project.findFirst({
+    const project = await this.prisma.project.findFirst({
       where: {
         id: projectId,
       },
@@ -46,7 +46,7 @@ export class ValidateResourcesIdsInterceptor implements NestInterceptor {
     const taskId = request.params.taskId
 
     if (taskId) {
-      const task = await this.prsima.task.findFirst({
+      const task = await this.prisma.task.findFirst({
         where: {
           projectId,
           id: taskId,

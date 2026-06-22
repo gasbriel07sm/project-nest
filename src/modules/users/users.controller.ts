@@ -29,7 +29,7 @@ export class UsersController {
   }
 
   @Get(':userId')
-  @ApiResponse({ type: [UserFullDTO] })
+  @ApiResponse({ type: UserFullDTO })
   async findOne(@Param('userId', ParseUUIDPipe) userId: string) {
     const user = await this.userService.findById(userId)
 
