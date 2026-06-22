@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 import { PrismaService } from '../../prisma.service'
 import { UsersService } from '../users/users.service'
-import { SignUpDTO } from './auth.dto'
+import { SignInDTO, SignUpDTO } from './auth.dto'
 
 @Injectable()
 export class AuthService {
@@ -24,6 +24,24 @@ export class AuthService {
     })
 
     // Retornar o token JWT de acesso
-    
+    return {
+      token: this.jwtService.sign({
+        sub: newUser.id,
+      }),
+    }
+  }
+
+  async signIn(data: SignInDTO) {
+    const user = await this.usersService.findByEmail(data.email)
+
+    if (user && (await bcrypt.compare(data.password, user.password))) {
+      return {
+        token: this.jwtService.sign({
+          sub: user.id,
+        }),
+      }
+    }
+
+    throw new UnauthorizedException()
   }
 }
