@@ -11,7 +11,7 @@ import {
   Put,
   UseInterceptors,
 } from '@nestjs/common'
-import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids/validate-resources-ids.decorator'
+import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids.decorator'
 import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids/validate-resources-ids.interceptor'
 import { TaskDTO } from './tasks.dto'
 import { TasksService } from './tasks.service'

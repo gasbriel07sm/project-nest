@@ -12,7 +12,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { ApiResponse } from '@nestjs/swagger'
-import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids/validate-resources-ids.decorator'
+import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids.decorator'
 import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids/validate-resources-ids.interceptor'
 import { ProjectFullDTO, ProjectListItemDTO, ProjectRequestDTO } from './projects.dto'
 import { ProjectsService } from './projects.service'

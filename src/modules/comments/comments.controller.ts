@@ -17,7 +17,7 @@ import {
   ApiOkResponse,
   ApiResponse,
 } from '@nestjs/swagger'
-import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids/validate-resources-ids.decorator'
+import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids.decorator'
 import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids/validate-resources-ids.interceptor'
 import { CommentFullDTO, CommentListItemDTO, CommentRequestDTO } from './comments.dto'
 import { CommentsService } from './comments.service'
