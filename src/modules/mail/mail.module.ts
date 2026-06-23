@@ -1,7 +1,10 @@
 import { MailerModule } from '@nestjs-modules/mailer'
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/adapters/handlebars.adapter'
 import { Module } from '@nestjs/common'
+import { ClientsModule, Transport } from '@nestjs/microservices'
 import path from 'path'
+import { EMAIL_QUEUE, EMAIL_SERVICE } from '../../consts'
+import { MailConsumer } from './mail.consumer'
 import { MailService } from './mail.service'
 
 @Module({
@@ -27,8 +30,20 @@ import { MailService } from './mail.service'
         },
       },
     }),
+    ClientsModule.register([
+      {
+        name: EMAIL_SERVICE,
+        transport: Transport.RMQ,
+        options: {
+          urls: [process.env.RABBITMQ_URL!],
+          queue: EMAIL_QUEUE,
+          queueOptions: { durable: true },
+        },
+      },
+    ]),
   ],
   providers: [MailService],
-  exports: [MailService],
+  exports: [MailService, ClientsModule],
+  controllers: [MailConsumer],
 })
 export class MailModule {}
