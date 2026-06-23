@@ -9,9 +9,11 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common'
 import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids.decorator'
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard'
 import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids/validate-resources-ids.interceptor'
 import { TaskDTO } from './tasks.dto'
 import { TasksService } from './tasks.service'
@@ -21,6 +23,7 @@ import { TasksService } from './tasks.service'
   path: 'projects/:projectId/tasks',
 })
 @UseInterceptors(ValidateResourcesIdsInterceptor)
+@UseGuards(JwtAuthGuard)
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
@@ -41,8 +44,7 @@ export class TasksController {
   findOne(
     @Param('projectId', ParseUUIDPipe) projectId: string,
     @Param('taskId', ParseUUIDPipe) taskId: string,
-  )
-   {
+  ) {
     return this.tasksService.findById(projectId, taskId)
   }
 
