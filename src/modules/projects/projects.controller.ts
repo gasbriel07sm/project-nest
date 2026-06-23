@@ -20,6 +20,7 @@ import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard'
 import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids/validate-resources-ids.interceptor'
 import { ProjectFullDTO, ProjectListItemDTO, ProjectRequestDTO } from './projects.dto'
 import { ProjectsService } from './projects.service'
+import { ApiPaginatedResponse } from '../../common/swagger/api-paginated-response'
 
 @Controller({
   version: '1',
@@ -32,9 +33,7 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Get()
-  @ApiResponse({
-    type: [ProjectListItemDTO],
-  })
+  @ApiPaginatedResponse(ProjectListItemDTO)
   findAll(@Query() query?: QueryPaginationDTO) {
     return this.projectsService.findAll(query)
   }
