@@ -17,4 +17,5 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "prisma.pinToPrisma6": true,
+  "js/ts.tsdk.path": "node_modules\\typescript\\lib",
 }

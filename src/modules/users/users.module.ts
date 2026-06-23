@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common'
+import { CloudinaryService } from '../../common/service/cloudinary.service'
+import { RequestContextService } from '../../common/service/request-context.service'
 import { PrismaService } from '../../prisma.service'
 import { UsersController } from './users.controller'
 import { UsersService } from './users.service'
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, PrismaService],
+  providers: [UsersService, PrismaService, CloudinaryService, RequestContextService],
 })
 export class UsersModule {}

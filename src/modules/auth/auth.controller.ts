@@ -1,7 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common'
-import { AuthGuard } from '@nestjs/passport'
-import type { User } from '@prisma/client'
-import { AuthenticatedUser } from '../../common/decorators/authenticated-user.decorator'
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common'
 import { UsersService } from '../users/users.service'
 import { ForgotPasswordDTO, ResetPasswordDTO, SignInDTO, SignUpDTO } from './auth.dto'
 import { AuthService } from './auth.service'
