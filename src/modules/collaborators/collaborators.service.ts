@@ -1,14 +1,17 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
-import { PrismaService } from '../../prisma.service'
-import { AddCollaboratorDTO, UpdateCollaboratorDTO } from './collaboratos.dto'
 import { CollaboratorRole } from '@prisma/client'
+import { QueryPaginationDTO } from '../../common/dtos/query-pagination.dto'
+import { PrismaService } from '../../prisma.service'
+import { paginate, paginateOutput } from '../../utils/pagination.utils'
+import { AddCollaboratorDTO, CollaboratorListItemDTO, UpdateCollaboratorDTO } from './collaboratos.dto'
 
 @Injectable()
 export class CollaboratorsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findAllByProject(projectId: string) {
-    return this.prisma.projectCollaborator.findMany({
+  async findAllByProject(projectId: string, query?: QueryPaginationDTO) {
+    const collaborators = await this.prisma.projectCollaborator.findMany({
+      ...paginate(query),
       where: {
         projectId,
       },
@@ -23,6 +26,12 @@ export class CollaboratorsService {
         },
       },
     })
+
+    const total = await this.prisma.projectCollaborator.count({
+      where: { projectId },
+    })
+
+    return paginateOutput<CollaboratorListItemDTO>(collaborators, total, query)
   }
 
   async create(projectId: string, data: AddCollaboratorDTO) {
@@ -98,7 +107,8 @@ export class CollaboratorsService {
 
     if (!collaborator) throw new NotFoundException('Collaborator not found in this project')
 
-    if (collaborator.role === CollaboratorRole.OWNER) throw new BadRequestException("The project owner can't be removed")
+    if (collaborator.role === CollaboratorRole.OWNER)
+      throw new BadRequestException("The project owner can't be removed")
 
     return this.prisma.projectCollaborator.delete({
       where: {
