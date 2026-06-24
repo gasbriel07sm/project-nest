@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { RequestContextService } from '../../common/service/request-context.service'
+import { RequestContextService } from '../../common/service/request-context/request-context.service'
 import { PrismaService } from '../../prisma.service'
 import { ProjectsController } from './projects.controller'
 import { ProjectsService } from './projects.service'

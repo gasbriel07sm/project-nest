@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
-import { CloudinaryService } from '../../common/service/cloudinary.service'
-import { RequestContextService } from '../../common/service/request-context.service'
+import { CloudinaryService } from '../../common/service/cloudinary/cloudinary.service'
+import { RequestContextService } from '../../common/service/request-context/request-context.service'
 import { PrismaService } from '../../prisma.service'
 import { UsersController } from './users.controller'
 import { UsersService } from './users.service'

@@ -1,6 +1,6 @@
 import { ExecutionContext } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { RequestContextService } from '../service/request-context.service'
+import { RequestContextService } from '../service/request-context/request-context.service'
 import { JwtAuthGuard } from './jwt-auth.guard'
 
 describe('JwtAuthGuard', () => {
