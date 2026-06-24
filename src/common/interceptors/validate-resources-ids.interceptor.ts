@@ -7,8 +7,8 @@ import {
 } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { Observable } from 'rxjs'
-import { VALIDATE_RESOURCES_IDS_KEY } from '../../../consts'
-import { PrismaService } from '../../../prisma.service'
+import { VALIDATE_RESOURCES_IDS_KEY } from '../../consts'
+import { PrismaService } from '../../prisma.service'
 
 @Injectable()
 export class ValidateResourcesIdsInterceptor implements NestInterceptor {
@@ -54,8 +54,8 @@ export class ValidateResourcesIdsInterceptor implements NestInterceptor {
       })
 
       if (!task) {
-      throw new NotFoundException('Task not found')
-    }
+        throw new NotFoundException('Task not found')
+      }
     }
 
     return next.handle()

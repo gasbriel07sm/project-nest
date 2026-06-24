@@ -17,10 +17,10 @@ import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger'
 import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids.decorator'
 import { QueryPaginationDTO } from '../../common/dtos/query-pagination.dto'
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard'
-import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids/validate-resources-ids.interceptor'
+import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids.interceptor'
+import { ApiPaginatedResponse } from '../../common/swagger/api-paginated-response'
 import { ProjectFullDTO, ProjectListItemDTO, ProjectRequestDTO } from './projects.dto'
 import { ProjectsService } from './projects.service'
-import { ApiPaginatedResponse } from '../../common/swagger/api-paginated-response'
 
 @Controller({
   version: '1',

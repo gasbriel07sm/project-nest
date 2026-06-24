@@ -22,7 +22,7 @@ import {
 import { ValidateResourcesIds } from '../../common/decorators/validate-resources-ids.decorator'
 import { QueryPaginationDTO } from '../../common/dtos/query-pagination.dto'
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard'
-import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids/validate-resources-ids.interceptor'
+import { ValidateResourcesIdsInterceptor } from '../../common/interceptors/validate-resources-ids.interceptor'
 import { ApiPaginatedResponse } from '../../common/swagger/api-paginated-response'
 import { TaskFullDTO, TaskListItemDTO, TaskRequestDTO } from './tasks.dto'
 import { TasksService } from './tasks.service'
