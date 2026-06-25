@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { TaskPriority, TaskStatus } from '@prisma/client'
+import { TaskPriority, TaskStatus } from '@prisma-generated/client'
 import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
 export class TaskRequestDTO {
@@ -82,9 +82,9 @@ export class TaskCommentDTO {
 }
 
 export class TaskFullDTO extends TaskBaseDTO {
-  @ApiProperty({ type: TaskAssigneeDTO, nullable: true, required: false})
+  @ApiProperty({ type: TaskAssigneeDTO, nullable: true, required: false })
   assignee?: TaskAssigneeDTO | null
 
-  @ApiProperty({ type: [TaskCommentDTO]})
+  @ApiProperty({ type: [TaskCommentDTO] })
   comments: TaskCommentDTO[]
 }

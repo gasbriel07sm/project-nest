@@ -1,5 +1,5 @@
 import { Injectable, Scope } from '@nestjs/common'
-import type { User } from '@prisma/client'
+import type { User } from '@prisma-generated/client'
 
 @Injectable({
   scope: Scope.REQUEST,

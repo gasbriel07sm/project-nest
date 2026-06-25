@@ -1,9 +1,13 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
-import { CollaboratorRole } from '@prisma/client'
+import { CollaboratorRole } from '@prisma-generated/client'
 import { QueryPaginationDTO } from '../../common/dtos/query-pagination.dto'
 import { PrismaService } from '../../prisma.service'
 import { paginate, paginateOutput } from '../../utils/pagination.utils'
-import { AddCollaboratorDTO, CollaboratorListItemDTO, UpdateCollaboratorDTO } from './collaboratos.dto'
+import {
+  AddCollaboratorDTO,
+  CollaboratorListItemDTO,
+  UpdateCollaboratorDTO,
+} from './collaboratos.dto'
 
 @Injectable()
 export class CollaboratorsService {
