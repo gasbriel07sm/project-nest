@@ -1,5 +1,6 @@
 import { JwtService } from '@nestjs/jwt'
 import { Test, TestingModule } from '@nestjs/testing'
+import { RequestContextService } from '../../common/service/request-context/request-context.service'
 import { PrismaService } from '../../prisma.service'
 import { mockedUsers } from '../users/users.mock'
 import { UsersService } from '../users/users.service'
@@ -9,8 +10,8 @@ import { AuthService } from './auth.service'
 
 describe('AuthController', () => {
   let controller: AuthController
-  let service: AuthService
-  let userService: UsersService
+  let service: AuthService = undefined!
+  let userService: UsersService = undefined!
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -27,13 +28,15 @@ describe('AuthController', () => {
       })
       .overrideProvider(UsersService)
       .useValue(userService)
+      .overrideProvider(RequestContextService)
+      .useValue({
+        getUserId: jest.fn().mockReturnValue('user-1'),
+      })
       .compile()
-
     controller = module.get<AuthController>(AuthController)
     service = module.get<AuthService>(AuthService)
     userService = module.get<UsersService>(UsersService)
   })
-
   describe('signUp', () => {
     it('should be able to sign up a new user', async () => {
       const user = mockedUsers[0]
@@ -133,6 +136,38 @@ describe('AuthController', () => {
       await expect(controller.resetPassword({ token: '', newPassword: '' })).rejects.toThrow(
         'Token is required',
       )
+    })
+  })
+
+  describe('changePassword', () => {
+    it('should be able to change the password', async () => {
+      const user = mockedUsers[0]
+
+      jest.spyOn(service, 'changePassword').mockResolvedValue(user)
+
+      const response = await controller.changePassword(user, {
+        currentPassword: '123',
+        newPassword: '321',
+      })
+
+      expect(response).toEqual({
+        message: 'Password changed successfully',
+      })
+      expect(service.changePassword).toHaveBeenCalledTimes(1)
+    })
+
+    it('should be able to handle validation errors', async () => {
+      const user = mockedUsers[0]
+      const error = new Error('CurrentPassword is required')
+
+      jest.spyOn(service, 'changePassword').mockRejectedValue(error)
+
+      await expect(
+        controller.changePassword(user, {
+          currentPassword: '',
+          newPassword: '',
+        }),
+      ).rejects.toThrow('CurrentPassword is required')
     })
   })
 })
